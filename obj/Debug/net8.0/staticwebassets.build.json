@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "fVyV9HLL+45wgTd9J8kfxA5T7gIgzkpHrvysxfBvGoM=",
+  "Source": "MilkCollector.API",
+  "BasePath": "_content/MilkCollector.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
