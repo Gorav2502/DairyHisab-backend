@@ -1,14 +1,21 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["MilkCollector.csproj", "./"]
-RUN dotnet restore
+
+# Update to use MilkCollector.API.csproj
+COPY ["MilkCollector.API.csproj", "./"]
+RUN dotnet restore "MilkCollector.API.csproj"
+
 COPY . .
-RUN dotnet publish -c Release -o /app
+# Build the project
+RUN dotnet publish "MilkCollector.API.csproj" -c Release -o /app
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app .
-# Render uses port 10000 by default for free web services
+
+# Render configuration
 ENV ASPNETCORE_URLS=http://+:10000
 EXPOSE 10000
-ENTRYPOINT ["dotnet", "MilkCollector.dll"]
+
+# The output DLL will also be named MilkCollector.API.dll
+ENTRYPOINT ["dotnet", "MilkCollector.API.dll"]
